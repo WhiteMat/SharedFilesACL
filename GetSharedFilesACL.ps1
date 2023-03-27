@@ -85,17 +85,54 @@ if ($CSVExport -or $HTMLExport) {
 if ($HTMLExport) {
     $html = (Get-Location).tostring() + '\' + $time +'\index.html'
     '
+    <html>
     <style>
-      table, td, th {
-        border: 1px solid;
-      }
+        table {
+	        border-collapse: collapse;
+          font-family: Tahoma, Geneva, sans-serif;
+        }
+        table td {
+	        padding: 15px;
+        }
+        table thead th {
+	        background-color: #54585d;
+	        color: #ffffff;
+	        font-weight: bold;
+	        font-size: 13px;
+	        border: 1px solid #54585d;
+        }
+        table tbody td {
+	        color: #636363;
+	        border: 1px solid #dddfe1;
+        }
+        table tbody tr {
+	        background-color: #f9fafb;
+        }
+        table tbody tr:nth-child(odd) {
+	        background-color: #ffffff;
+        }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
+        .title {
+            background-color: #54585d;
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .content {
+            margin: 5px;
+        }
+
+        body {
+            margin: 0px;
+            background-color: #f9fafb;
+        }
     </style>
-    <h1>File Shared ACL HTML Export</h1>
+    <body>
+    <div class="title">
+      <h1>Shared Files ACLs: HTML Export</h1>
+    </div>
+    <div class="content">
     '+ $allHTMLElement +'
     <script>
         const buttons = document.getElementsByClassName("leaflet");
@@ -109,7 +146,7 @@ if ($HTMLExport) {
                 }
             });
         }
-    </script>
+    </script></div></body></html>
     ' | Out-File -FilePath $html
 }
 
